@@ -31,7 +31,6 @@ public class stateNode {
     // Access inner HashMap using a State name
     // Inner HashMap holds transition probabilities
     LinkedHashMap<String, LinkedHashMap<String, Double>> actionList;
-    LinkedHashMap<String, stateNode> stateLinks;
 
     /**
      * Class constructor used to initialize all data to default values when they are<br>
@@ -41,8 +40,6 @@ public class stateNode {
         stateName = " ";
         stateReward = 0;
         actionList = new LinkedHashMap<>();
-        stateLinks = new LinkedHashMap<>();
-
     }
 
     /**
@@ -73,13 +70,21 @@ public class stateNode {
             if(!actionList.containsKey(data[i]))
                 actionList.put(data[i], new LinkedHashMap<>());
 
-            // Add node to stateMap if it is not in there
-            if(!stateLinks.containsValue(data[i + 1]))
-                stateLinks.put(data[i + 1], stateMap.get(data[i + 1]));
 
             // Add transition data for state to corresponding action
             actionList.get(data[i]).put(data[i + 1], Double.parseDouble(data[i + 2]));
         }
+    }
 
+    public String getStateName() {
+        return stateName;
+    }
+
+    public int getStateReward() {
+        return stateReward;
+    }
+
+    public LinkedHashMap<String, LinkedHashMap<String, Double>> getActionList() {
+        return actionList;
     }
 }

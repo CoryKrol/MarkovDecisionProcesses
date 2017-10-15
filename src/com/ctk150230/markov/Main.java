@@ -37,6 +37,8 @@ public class Main {
 
         LinkedHashMap<String, stateNode> stateMap = initStateMap(fileName, numberOfStates);
 
+        valueIteration valueList = new valueIteration(stateMap, 20, numberOfStates, numberOfActions, discountFactor);
+
     }
 
     /**
