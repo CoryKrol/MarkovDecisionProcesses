@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
  * A class to hold state information used in the Markov Decision Process<br>
  *     The class accepts an arrary containing the name, reward, and transition data<br>
  *         for each action. It also accepts a LinkedHashMap of other of all other states used<br>
- *             to fill the stateLinks maps which are all the states we can reach from this state <br><br.
+ *             to fill the stateLinks maps which are all the states we can reach from this state <br><br>
  *
  * The <b>actionList</b> contains all the actions we can take here, inside the Map are all states we can<br>
  *     reach with said action and the probabilities of going to each state. <br><br>
