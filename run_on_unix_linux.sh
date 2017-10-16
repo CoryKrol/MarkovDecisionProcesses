@@ -2,8 +2,8 @@
 
 if [ $# -eq 4 ]
   then
-    mkdir -p out/production/BayesianLearning
-    find ./src/com/ctk150230/ -name "*.java" > sources.txt
+    mkdir -p out/production/MarkovDecisionProcesses
+    find ./src/com/ctk150230/markov -name "*.java" > sources.txt
     javac @sources.txt -d ./out/production/MarkovDecisionProcesses
 
     java -cp ./out/production/MarkovDecisionProcesses com.ctk150230.markov.Main $1 $2 $3 $4
