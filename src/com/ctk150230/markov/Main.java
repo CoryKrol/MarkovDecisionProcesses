@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * <h1>Markov Decision Process</h1>
@@ -39,13 +40,14 @@ public class Main {
 
         valueIteration valueList = new valueIteration(stateMap, 20, numberOfStates, numberOfActions, discountFactor);
 
+        printValueList(valueList);
     }
 
     /**
      * Used to display the proper usage if the correct number of arguments are not supplied when launching the
      * program from the console.
      */
-    public static void usage(){
+    private static void usage(){
         System.out.println("Markov Decision Processes");
         System.out.println("Author: Charles Krol\n");
         System.out.println("Usage: java -c Main <number_of_states_in_MDP> <num_of_possible_actions> <input_filename> <discount_factor_\uD835\uDEC4>");
@@ -58,7 +60,7 @@ public class Main {
      * @return the fully initialized stateMap holding stateNodes fully initialized with all data from the input file
      * @throws IOException
      */
-    public static LinkedHashMap<String, stateNode> initStateMap(String fileName, int numberOfStates) throws IOException{
+    private static LinkedHashMap<String, stateNode> initStateMap(String fileName, int numberOfStates) throws IOException{
 
         FileReader fr = null;
         BufferedReader br = null;
@@ -112,5 +114,46 @@ public class Main {
                 fr.close();
             return stateMap;
         }
+    }
+
+    /**
+     * Used to print out all the J* Values for each iteration
+     * @param vList the list of J* Values
+     */
+    private static void printValueList(valueIteration vList){
+        // Used in output of current time division
+        int i  = 1;
+
+        // Iterate through all time divisions
+        for(LinkedHashMap<String, jValueNode> entry : vList.getjValues()){
+            // Output current time division
+            System.out.println("After iteration " + i + ":");
+
+            // Iterate through each state for the current time division
+            for(Map.Entry<String, jValueNode> state : entry.entrySet()){
+                // Output state name
+                System.out.print("(" + state.getKey() + " ");
+
+                // Output best action's name
+                System.out.print(state.getValue().getBestAction());
+
+                // Round best action's expected discounted rewards value to 4 decimal places and output value
+                System.out.printf(" %.4f) ", roundTo4Places(state.getValue().getExpectedDiscountedReward()));
+            }
+            // Go to next line
+            System.out.println();
+
+            // Increment i before moving to next iteration
+            i++;
+        }
+    }
+
+    /**
+     * Used to round a decimal to 4 places
+     * @param num the decimal to round to 4 places
+     * @return the decimal rounded to 4 places
+     */
+    private static double roundTo4Places(double num){
+        return (Math.round(num * 10000.0) / 10000.0);
     }
 }

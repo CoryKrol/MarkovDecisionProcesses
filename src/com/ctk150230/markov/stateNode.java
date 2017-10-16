@@ -17,9 +17,10 @@ import java.util.LinkedHashMap;
  *     next state in the Value Iteration algorithm
  *
  * @see LinkedHashMap
+ * @see valueIteration
  *
  * @author Charles Krol
- * @since 2017-10-13
+ * @since 2017-10-15
  */
 public class stateNode {
 
@@ -49,7 +50,7 @@ public class stateNode {
      * @param stateMap a HashMap containing all state nodes used to add states we can <br>
      *                 transition to to the stateLinks HashMap
      */
-    public void initState(String[] data, LinkedHashMap<String, stateNode> stateMap){
+    void initState(String[] data, LinkedHashMap<String, stateNode> stateMap){
         stateName = data[0];
         stateReward = Integer.parseInt(data[1]);
         processTransitionData(data, stateMap);
@@ -76,15 +77,19 @@ public class stateNode {
         }
     }
 
-    public String getStateName() {
-        return stateName;
-    }
-
-    public int getStateReward() {
+    /**
+     * Getter to return the state's reward value
+     * @return returns the state's reward value
+     */
+    int getStateReward() {
         return stateReward;
     }
 
-    public LinkedHashMap<String, LinkedHashMap<String, Double>> getActionList() {
+    /**
+     * Getter for the action list, used is the valueIteration class in calculating the J Values for this state
+     * @return the action list
+     */
+    LinkedHashMap<String, LinkedHashMap<String, Double>> getActionList() {
         return actionList;
     }
 }
